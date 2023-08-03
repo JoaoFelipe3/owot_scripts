@@ -4,8 +4,8 @@ let cooldown = true;
 
 const startCooldown = () => {
   cooldown = false;
-  const end = Date.getTime() + 2000;
-  while (Date.getTime() < end);
+  const end = new Date() + 2000;
+  while (new Date() < end);
   cooldown = true;
 }
 
