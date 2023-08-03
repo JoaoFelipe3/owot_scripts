@@ -1,8 +1,12 @@
 api_chat_send("MOMBOT", {nick: "mombot"})
 
-const syncSleep = ms => {
-  const end = new Date.getTime() + ms;
+let cooldown = true;
+
+const startCooldown = () => {
+  cooldown = false;
+  const end = new Date.getTime() + 2000;
   while (new Date.getTime() < end);
+  cooldown = true;
 }
 
-w.on("chatmod", (e) => e.message.startsWith("!mom") ? api_chat_send("yo mama so " + e.message.slice(4), {nick: "mombot"}) || syncSleep(2) : null)
+w.on("chatmod", (e) => e.message.startsWith("!mom") && cooldown ? api_chat_send("yo mama so " + e.message.slice(4), {nick: "mombot"}) || startCooldown() : null)
